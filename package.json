@@ -20,6 +20,7 @@
   "homepage": "https://github.com/iGobz/welcometoaroma_bot#readme",
   "dependencies": {
     "axios": "^0.26.1",
+    "node-fetch": "^3.2.3",
     "node-telegram-bot-api": "^0.56.0"
   }
 }
