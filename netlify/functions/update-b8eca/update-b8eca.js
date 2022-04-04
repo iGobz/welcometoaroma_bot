@@ -10,17 +10,18 @@ console.log(process.env.BOT_TOKEN)
 
 
 bot.onText(/hello/, async (msg, match) => {
-    console.log('Got hello at ', msg.chat.id);
     const chatId = msg.chat.id;
+    console.log('Got hello at ', chatId);
     const res = await bot.sendMessage(chatId, 'Привет!');
     console.log('Hello res: ', res);
 
 });
 
 bot.on('message', async (msg, meta) => {
-    console.log('Got message at ', msg.chat.id);
-    bot.sendMessage(msg.chat.id, 'Got message');
-    const res = await bot.sendMessage(chatId, 'Привет!');
+    const chatId = msg.chat.id;
+    console.log('Got message at ', chatId);
+    bot.sendMessage(chatId, 'Got message');
+    const res = await bot.sendMessage(chatId, 'Привет медвет!');
     console.log('Message res: ', res);
 });
 
