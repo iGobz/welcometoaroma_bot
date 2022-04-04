@@ -12,6 +12,11 @@ bot.onText(/hello/, (msg, match) => {
 
 });
 
+bot.on('message', (msg, meta) => {
+    console.log('Got message');
+    bot.sendMessage(msg.chat.id, 'Got message');
+})
+
 export const handler = async (event) => {
     console.log(event.body);
     try {
