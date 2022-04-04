@@ -2,12 +2,13 @@
 import Telegram from 'node-telegram-bot-api';
 
 
-console.log(process.env);
-// const bot = new Telegram()
+// console.log(process.env.BOT_TOKEN);
+const bot = new Telegram(process.env.BOT_TOKEN)
 
 
 
-const handler = async (event) => {
+export const handler = async (event) => {
+    console.log(event);
   try {
     const subject = event.queryStringParameters.name || 'World'
     return {
@@ -22,4 +23,4 @@ const handler = async (event) => {
   }
 }
 
-export default { handler }
+// export default { handler }
