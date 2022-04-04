@@ -25,6 +25,7 @@ export const handler = async (event) => {
             // isBase64Encoded: true,
         }
     } catch (error) {
+        console.log(error);
         return { statusCode: 500, body: error.toString() }
     }
 }
