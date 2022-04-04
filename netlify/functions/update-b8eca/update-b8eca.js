@@ -3,14 +3,12 @@ import Telegram from 'node-telegram-bot-api';
 import axios from 'axios';
 
 
-
+const token = process.env.BOT_TOKEN || 'token';
 
 // console.log(process.env.BOT_TOKEN);
-const bot = new Telegram(process.env.BOT_TOKEN)
+const bot = new Telegram(token)
 
-console.log(process.env.BOT_TOKEN)
-
-
+console.log(token)
 
 bot.onText(/hello/, async (msg, match) => {
     const chatId = msg.chat.id;
