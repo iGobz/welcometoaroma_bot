@@ -20,7 +20,7 @@ bot.on('message', (msg, meta) => {
 export const handler = async (event) => {
     console.log(event.body);
     try {
-        bot.processUpdate(event.body);
+        bot.processUpdate(JSON.parse(event.body));
         const subject = event.queryStringParameters.name || 'World'
         return {
             statusCode: 200,
