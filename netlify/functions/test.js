@@ -1,4 +1,5 @@
-const fetch = require('node-fetch').default;
+//const fetch = require('node-fetch').default;
+import fetch from 'node-fetch';
 
 
 const res = fetch('https://api.telegram.org/bot5242713931:AAEHEFHsmGlaWLKkX1l_LRoNG7Kzm1dvWbM/sendMessage', {
