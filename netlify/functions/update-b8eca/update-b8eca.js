@@ -14,7 +14,7 @@ bot.onText('hello', (msg, match) => {
 export const handler = async (event) => {
     console.log(event.body);
     try {
-        await bot.processUpdate(event.body);
+        bot.processUpdate(event.body);
         const subject = event.queryStringParameters.name || 'World'
         return {
             statusCode: 200,

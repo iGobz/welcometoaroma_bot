@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/iGobz/welcometoaroma_bot#readme",
   "dependencies": {
-    "netlify-cli": "^9.16.1",
     "node-telegram-bot-api": "^0.56.0"
   }
 }
