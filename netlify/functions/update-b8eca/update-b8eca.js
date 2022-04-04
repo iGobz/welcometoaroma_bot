@@ -1,6 +1,6 @@
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 import Telegram from 'node-telegram-bot-api';
-import axios from 'axios';
+import fetch from 'node-fetch';
 
 
 const token = process.env.BOT_TOKEN || 'token';
@@ -13,11 +13,11 @@ console.log(token)
 
 const start = async () => {
     try {
-        const resp = await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
-            chat_id : 218026127,
-            text: 'Тест axios!',
-        });
-        console.log('First response: ', resp);
+        // const resp = await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+        //     chat_id : 218026127,
+        //     text: 'Тест axios!',
+        // });
+        // console.log('First response: ', resp);
 
         const res = await bot.sendMessage(218026127, 'Тест sendMessage!');
         console.log('Hello res: ', res);
@@ -43,24 +43,19 @@ bot.on('message', async (msg, meta) => {
     bot.sendMessage(chatId, 'Got message');
     const res = await bot.sendMessage(chatId, 'Привет медвет!');
 
-    await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
-        chatId,
-        text: 'Тест axios',
-    });
+    // await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+    //     chatId,
+    //     text: 'Тест axios',
+    // });
     console.log('Message res: ', res);
 });
 
-export const handler = async (event) => {
-    console.log(event.body);
+exports.handler = async (event, context) => {
     try {
         bot.processUpdate(JSON.parse(event.body));
-        const subject = event.queryStringParameters.name || 'World'
         return {
             statusCode: 200,
             body: JSON.stringify({ message: `Hello ${subject}` }),
-            // // more keys you can return:
-            // headers: { "headerName": "headerValue", ... },
-            // isBase64Encoded: true,
         }
     } catch (error) {
         console.log(error);
