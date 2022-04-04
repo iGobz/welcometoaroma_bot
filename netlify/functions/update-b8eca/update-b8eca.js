@@ -1,4 +1,12 @@
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
+import Telegram from 'node-telegram-bot-api';
+
+
+console.log(process.env);
+// const bot = new Telegram()
+
+
+
 const handler = async (event) => {
   try {
     const subject = event.queryStringParameters.name || 'World'
@@ -14,4 +22,4 @@ const handler = async (event) => {
   }
 }
 
-module.exports = { handler }
+export default { handler }
