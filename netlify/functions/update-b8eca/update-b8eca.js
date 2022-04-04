@@ -1,5 +1,8 @@
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 import Telegram from 'node-telegram-bot-api';
+import axios from 'axios';
+
+
 
 
 // console.log(process.env.BOT_TOKEN);
@@ -22,6 +25,11 @@ bot.on('message', async (msg, meta) => {
     console.log('Got message at ', chatId);
     bot.sendMessage(chatId, 'Got message');
     const res = await bot.sendMessage(chatId, 'Привет медвет!');
+
+    await axios.post(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`, {
+        chatId,
+        text: 'Тест axios',
+    });
     console.log('Message res: ', res);
 });
 
