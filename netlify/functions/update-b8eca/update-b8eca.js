@@ -6,6 +6,7 @@ import Telegram from 'node-telegram-bot-api';
 const bot = new Telegram(process.env.BOT_TOKEN)
 
 bot.onText('hello', (msg, match) => {
+    console.log('Got hello');
     const chatId = msg.chat.id;
     bot.sendMessage(chatId, 'Привет!');
 
