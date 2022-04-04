@@ -5,22 +5,27 @@ import Telegram from 'node-telegram-bot-api';
 // console.log(process.env.BOT_TOKEN);
 const bot = new Telegram(process.env.BOT_TOKEN)
 
+bot.onText('hello', (msg, match) => {
+    const chatId = msg.chat.id;
+    bot.sendMessage(chatId, 'Привет!');
 
+});
 
 export const handler = async (event) => {
-    console.log(event);
-  try {
-    const subject = event.queryStringParameters.name || 'World'
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
-      // // more keys you can return:
-      // headers: { "headerName": "headerValue", ... },
-      // isBase64Encoded: true,
+    console.log(event.body);
+    try {
+        await bot.processUpdate(event.body);
+        const subject = event.queryStringParameters.name || 'World'
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: `Hello ${subject}` }),
+            // // more keys you can return:
+            // headers: { "headerName": "headerValue", ... },
+            // isBase64Encoded: true,
+        }
+    } catch (error) {
+        return { statusCode: 500, body: error.toString() }
     }
-  } catch (error) {
-    return { statusCode: 500, body: error.toString() }
-  }
 }
 
 // export default { handler }
