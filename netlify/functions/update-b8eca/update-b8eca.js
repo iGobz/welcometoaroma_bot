@@ -5,17 +5,21 @@ import Telegram from 'node-telegram-bot-api';
 // console.log(process.env.BOT_TOKEN);
 const bot = new Telegram(process.env.BOT_TOKEN)
 
+console.log(process.env.BOT_TOKEN)
+
+
+
 bot.onText(/hello/, (msg, match) => {
-    console.log('Got hello', msg);
+    console.log('Got hello at ', msg.chat.id);
     const chatId = msg.chat.id;
     bot.sendMessage(chatId, 'Привет!');
 
 });
 
 bot.on('message', (msg, meta) => {
-    console.log('Got message', msg);
+    console.log('Got message at ', msg.chat.id);
     bot.sendMessage(msg.chat.id, 'Got message');
-})
+});
 
 export const handler = async (event) => {
     console.log(event.body);
