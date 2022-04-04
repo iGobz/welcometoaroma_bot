@@ -4,11 +4,30 @@ import axios from 'axios';
 
 
 const token = process.env.BOT_TOKEN || 'token';
+process.env.NTBA_FIX_319 = 1;
 
 // console.log(process.env.BOT_TOKEN);
 const bot = new Telegram(token)
 
 console.log(token)
+
+const start = async () => {
+    try {
+        const resp = await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+            chat_id : 218026127,
+            text: 'Тест axios!',
+        });
+        console.log('First response: ', resp);
+
+        const res = await bot.sendMessage(218026127, 'Тест sendMessage!');
+        console.log('Hello res: ', res);
+
+    } catch(error) {
+        console.log(error);
+    }   
+};
+
+start();
 
 bot.onText(/hello/, async (msg, match) => {
     const chatId = msg.chat.id;
@@ -24,7 +43,7 @@ bot.on('message', async (msg, meta) => {
     bot.sendMessage(chatId, 'Got message');
     const res = await bot.sendMessage(chatId, 'Привет медвет!');
 
-    await axios.post(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`, {
+    await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
         chatId,
         text: 'Тест axios',
     });
