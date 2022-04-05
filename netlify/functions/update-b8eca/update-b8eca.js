@@ -19,9 +19,23 @@ bot.onText(/hello/, async (msg, match) => {
 
 bot.onText(/\/start/, async (msg, match) => {
     const chatId = msg.chat.id;
-    const res = await bot.sendMessage(chatId, 'Привет! Я Арома Бот!');
+
+    var options = {
+        reply_markup: JSON.stringify({
+            inline_keyboard: [
+                [{ text: 'Аптечка', callback_data: '1' }],
+                [{ text: 'Some button text 2', callback_data: '2' }],
+                [{ text: 'Some button text 3', callback_data: '3' }]
+            ]
+        })
+    };
+
+    const res = await bot.sendMessage(chatId, 'Привет! Я Арома Бот!', options);
 });
 
+bot.on('callback_query', (query) => {
+    bot.answerCallbackQuery(query.id, { text: `Pressed ${query.data}`, });
+});
 
 exports.handler = async (event, context) => {
     try {
