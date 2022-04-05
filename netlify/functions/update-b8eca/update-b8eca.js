@@ -55,7 +55,7 @@ exports.handler = async (event, context) => {
         bot.processUpdate(JSON.parse(event.body));
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: `Hello ${subject}` }),
+            body: JSON.stringify({ message: `Hello` }),
         }
     } catch (error) {
         console.log(error);
