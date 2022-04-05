@@ -12,7 +12,7 @@ const bot = new Telegram(token)
 bot.onText(/hello/, async (msg, match) => {
     const chatId = msg.chat.id;
     console.log('Got hello at ', chatId, msg);
-    await bot.sendChatAction(chatId, 'typing');
+    // await bot.sendChatAction(chatId, 'typing');
     const res = await bot.sendMessage(chatId, 'Привет!');
     console.log('Hello res: ', res);
 });
