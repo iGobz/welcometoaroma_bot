@@ -26,6 +26,12 @@ bot.onText(/\/start/, async (msg, match) => {
                 [{ text: 'Аптечка', callback_data: '1' }],
                 [{ text: 'Some button text 2', callback_data: '2' }],
                 [{ text: 'Some button text 3', callback_data: '3' }]
+            ],
+            keyboard: [
+                [{text: "Cards", value: 'cards'}, {text: "Progress"}],
+                [{text: "Warning"}, {text: "Help"}],                 
+                ['Аптечка'],
+                ['Что-то ещё']
             ]
         })
     };
