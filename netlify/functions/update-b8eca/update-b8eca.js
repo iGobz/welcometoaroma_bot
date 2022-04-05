@@ -37,18 +37,18 @@ bot.onText(/hello/, async (msg, match) => {
 
 });
 
-bot.on('message', async (msg, meta) => {
-    const chatId = msg.chat.id;
-    console.log('Got message at ', chatId);
-    bot.sendMessage(chatId, 'Got message');
-    const res = await bot.sendMessage(chatId, 'Привет медвет!');
+// bot.on('message', async (msg, meta) => {
+//     const chatId = msg.chat.id;
+//     console.log('Got message at ', chatId);
+//     bot.sendMessage(chatId, 'Got message');
+//     const res = await bot.sendMessage(chatId, 'Привет медвет!');
 
-    // await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
-    //     chatId,
-    //     text: 'Тест axios',
-    // });
-    console.log('Message res: ', res);
-});
+//     // await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+//     //     chatId,
+//     //     text: 'Тест axios',
+//     // });
+//     console.log('Message res: ', res);
+// });
 
 exports.handler = async (event, context) => {
     try {
