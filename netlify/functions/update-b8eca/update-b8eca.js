@@ -7,7 +7,9 @@ const token = process.env.BOT_TOKEN || 'token';
 
 const bot = new Telegram(token)
 
-
+bot.on('webhook_error', (error) => {
+    console.log(error);
+  });
 
 bot.onText(/hello/, async (msg, match) => {
     const chatId = msg.chat.id;
