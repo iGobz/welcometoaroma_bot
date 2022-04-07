@@ -26,8 +26,14 @@ exports.handler = async (event) => {
 
     try {
         const { message } = JSON.parse(event.body);
-
-        await parse(message);
+        const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            body: JSON.stringify({
+                chat_id: message.chat.id,
+                text: 'Hello' ,
+            })
+        });
+        // await parse(message);
         // await sendMessage(message.chat.id, "I got your message!");
         return { statusCode: 200 };    
     } catch (error) {
