@@ -1,11 +1,11 @@
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
-import Telegram from 'node-telegram-bot-api';
+import TelegramBot from 'node-telegram-bot-api';
 import fetch from 'node-fetch';
 
 
 const token = process.env.BOT_TOKEN || 'token';
 
-const bot = new Telegram(token)
+const bot = new TelegramBot(token)
 
 bot.on('webhook_error', (error) => {
     console.log(error);
