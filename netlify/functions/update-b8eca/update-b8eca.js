@@ -6,7 +6,17 @@ bot.start((ctx) => ctx.reply('Welcome'))
 bot.help((ctx) => ctx.reply('Send me a sticker'))
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
-bot.launch()
+// bot.launch()
+
+exports.handler = async event => {
+    try {
+        await bot.handleUpdate(JSON.parse(event.body));
+        return { statusCode: 200, body: '' };    
+    } catch (error) {
+        console.log(error);
+        return { statusCode: 500, body: error.toString() }        
+    }
+}
 
 // import TelegramBot from 'node-telegram-bot-api';
 // import fetch from 'node-fetch';
