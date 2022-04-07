@@ -3,7 +3,8 @@ import fetch from 'node-fetch';
 
 const token = process.env.BOT_TOKEN
 
-const parse = async(message) => {
+const parse = async (message) => {
+    console.log(message)
 
     try {
         const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
