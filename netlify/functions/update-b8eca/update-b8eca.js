@@ -46,8 +46,21 @@ bot.on('callback_query', (query) => {
 });
 
 exports.handler = async (event, context) => {
+    // const promise = new Promise((resolve, reject) => {
+    //     bot.processUpdate(JSON.parse(event.body));
+    //     resolve(200, )
+    //     return {
+    //         statusCode: 200,
+    //         body: JSON.stringify({ message: `Hello` }),
+    //     }
+    // }).catch((error) => {
+    //     console.log(error);
+    //     return { statusCode: 500, body: error.toString() }
+    // });
+
+    // return promise;
     try {
-        bot.processUpdate(JSON.parse(event.body));
+        await bot.processUpdate(JSON.parse(event.body));
         return {
             statusCode: 200,
             body: JSON.stringify({ message: `Hello` }),
