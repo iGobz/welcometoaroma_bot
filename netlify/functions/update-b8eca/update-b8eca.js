@@ -9,8 +9,8 @@ const parse = async(message) => {
         const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
             method: 'POST',
             body: JSON.stringify({
-                chat_id: 218026127,
-                text: 'Hello, ' + message.text,
+                chat_id: message.chat.id,
+                text: 'Hello' ,
             })
         });
     } catch (error) {
