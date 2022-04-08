@@ -5,18 +5,18 @@ import EventEmitter from 'events';
 const token = process.env.BOT_TOKEN
 const emitter = new EventEmitter();
 
-emitter.on('text', async (message) => {
+emitter.on('text', (message) => {
 
     if (message.text == '/start') {
         console.log('Handling received message: ', message);
-        await sendMessage(message.chat.id, 'Привет! Я Арома Бот!');
+        sendMessage(message.chat.id, 'Привет! Я Арома Бот!');
     }
 });
 
-const sendMessage = async (chat_id, text) => {
+const sendMessage = (chat_id, text) => {
     try {
         console.log('Inside sendMessage: ', text);
-        const res = await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, { 
+        const res = axios.post(`https://api.telegram.org/bot${token}/sendMessage`, { 
             chat_id,
             text
         });
@@ -31,7 +31,7 @@ const sendMessage = async (chat_id, text) => {
 
 
 
-const handleUpdate = async (update) => {
+const handleUpdate = (update) => {
 
 
     if (update.message) {
@@ -47,7 +47,7 @@ const handleUpdate = async (update) => {
 export async function handler(event, context) {
     const update = JSON.parse(event.body);
     console.log("Received an update from Telegram!", event);
-    await handleUpdate(update);
+    handleUpdate(update);
     
     // if (message) {
     //     await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
