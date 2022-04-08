@@ -7,10 +7,12 @@ const token = process.env.BOT_TOKEN
 exports.handler = async (event) => {
     const { message } = JSON.parse(event.body);
     console.log("Received an update from Telegram!", event);
-    await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
-        chat_id: message.chat.id,
-        text: "I got your message: " + message.text,
-      });    
+    if (message) {
+        await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+            chat_id: message.chat.id,
+            text: "I got your message: " + message.text,
+        });        
+    }
     return { statusCode: 200 };
 };
 
