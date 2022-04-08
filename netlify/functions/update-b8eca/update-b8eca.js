@@ -29,7 +29,7 @@ exports.handler = async (event) => {
         const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
             method: 'POST',
             body: JSON.stringify({
-                chat_id: message.chat.id,
+                chat_id: 218026127, //message.chat.id,
                 text: 'Hello' ,
             })
         });
