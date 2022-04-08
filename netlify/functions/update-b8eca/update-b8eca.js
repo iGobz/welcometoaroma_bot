@@ -41,10 +41,14 @@ const handleUpdate = async (update) => {
         if (message.text) {
             // emitter.emit('text', message);
             if (message) {
-                await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
-                    chat_id: message.chat.id,
-                    text: "I got your message: " + message.text,
-                });        
+                try {
+                    await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+                        chat_id: message.chat.id,
+                        text: "I got your message: " + message.text,
+                    });            
+                } catch (error) {
+                    console.log('Caught error in handleUpdate: ', error)
+                }
             }
         }
     }
