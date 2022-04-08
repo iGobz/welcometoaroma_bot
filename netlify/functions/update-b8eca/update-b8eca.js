@@ -1,12 +1,29 @@
 // // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 import axios from 'axios';
+
 const token = process.env.BOT_TOKEN
 
 
+// const parse = async (message) => {
+//     console.log(message)
 
-export async function handler(event) {
+//     try {
+//         const res = await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+//             body: JSON.stringify({
+//                 chat_id: message.chat.id,
+//                 text: 'Hello' ,
+//             })
+//         });
+//     } catch (error) {
+//         throw Error(error);
+//     }
+
+// };
+
+export async function handler(event, context) {
     const { message } = JSON.parse(event.body);
-    console.log("Received an update from Telegram!", event);
+    console.log("Received an update from Telegram!", event, context);
+    
     if (message) {
         await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
             chat_id: message.chat.id,
