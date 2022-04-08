@@ -1,35 +1,56 @@
 // // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 import axios from 'axios';
+import EventEmitter from 'events';
 
 const token = process.env.BOT_TOKEN
+const emitter = new EventEmitter();
+
+emitter.on('text', async (message) => {
+
+    if (message.text == '/start') {
+        await sendMessage(message.chat.id, 'Привет! Я Арома Бот!');
+    }
+});
+
+const sendMessage = async (chat_id, body) => {
+    try {
+        return await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, { 
+            chat_id,
+            body
+        });
+    } catch (error) {
+        throw Error(error);
+    }
+}
 
 
-// const parse = async (message) => {
-//     console.log(message)
 
-//     try {
-//         const res = await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
-//             body: JSON.stringify({
-//                 chat_id: message.chat.id,
-//                 text: 'Hello' ,
-//             })
-//         });
-//     } catch (error) {
-//         throw Error(error);
-//     }
 
-// };
+
+const handleUpdate = async (update) => {
+
+
+    if (update.message) {
+
+        const { message } = update;
+        
+        if (message.text) {
+            emitter.emit('text', message);
+        }
+    }
+};
 
 export async function handler(event, context) {
-    const { message } = JSON.parse(event.body);
-    console.log("Received an update from Telegram!", event, context);
+    const update = JSON.parse(event.body);
+    console.log("Received an update from Telegram!", event);
+    await handleUpdate(update);
     
-    if (message) {
-        await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
-            chat_id: message.chat.id,
-            text: "I got your message: " + message.text,
-        });        
-    }
+    // if (message) {
+    //     await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+    //         chat_id: message.chat.id,
+    //         text: "I got your message: " + message.text,
+    //     });        
+    // }
     return { statusCode: 200 };
 }
 
