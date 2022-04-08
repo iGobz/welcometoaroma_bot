@@ -47,7 +47,8 @@ const handleUpdate = async (update) => {
                         text: "I got your message: " + message.text,
                     });            
                 } catch (error) {
-                    console.log('Caught error in handleUpdate: ', error)
+                    console.log('Caught error in handleUpdate: ', error);
+                    throw Error(error);
                 }
             }
         }
