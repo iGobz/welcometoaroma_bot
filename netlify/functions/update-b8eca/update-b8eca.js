@@ -31,7 +31,7 @@ const sendMessage = (chat_id, text) => {
 
 
 
-const handleUpdate = (update) => {
+const handleUpdate = async (update) => {
 
 
     if (update.message) {
@@ -39,7 +39,13 @@ const handleUpdate = (update) => {
         const { message } = update;
 
         if (message.text) {
-            emitter.emit('text', message);
+            // emitter.emit('text', message);
+            if (message) {
+                await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    chat_id: message.chat.id,
+                    text: "I got your message: " + message.text,
+                });        
+            }
         }
     }
 };
@@ -47,14 +53,14 @@ const handleUpdate = (update) => {
 export async function handler(event) {
     const update = JSON.parse(event.body);
     console.log("Received an update from Telegram!", event);
-    // handleUpdate(update);
-    const { message } = update;
-    if (message) {
-        await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
-            chat_id: message.chat.id,
-            text: "I got your message: " + message.text,
-        });        
-    }
+    handleUpdate(update);
+    // const { message } = update;
+    // if (message) {
+    //     await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+    //         chat_id: message.chat.id,
+    //         text: "I got your message: " + message.text,
+    //     });        
+    // }
     return { statusCode: 200 };
 }
 
