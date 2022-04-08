@@ -13,13 +13,14 @@ emitter.on('text', async (message) => {
     }
 });
 
-const sendMessage = async (chat_id, body) => {
+const sendMessage = async (chat_id, text) => {
     try {
         console.log('Inside sendMessage: ', body);
-        return await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, { 
+        const res = await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, { 
             chat_id,
-            body
+            text
         });
+        return res;
     } catch (error) {
         console.log('Got error: ', error);
         throw Error(error);
