@@ -1,6 +1,6 @@
 // // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
-import axios from 'axios';
-import EventEmitter from 'events';
+const axios = require('axios').default;
+const EventEmitter = require('events');
 
 const token = process.env.BOT_TOKEN
 const emitter = new EventEmitter();
