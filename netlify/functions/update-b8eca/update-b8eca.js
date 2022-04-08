@@ -42,7 +42,7 @@ const handleUpdate = (update) => {
             // emitter.emit('text', message);
             if (message) {
                 try {
-                    axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
                         chat_id: message.chat.id,
                         text: "I got your message: " + message.text,
                     });            
