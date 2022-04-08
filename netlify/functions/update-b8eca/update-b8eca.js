@@ -31,7 +31,7 @@ const sendMessage = (chat_id, text) => {
 
 
 
-const handleUpdate = async (update) => {
+const handleUpdate = (update) => {
 
 
     if (update.message) {
@@ -42,7 +42,7 @@ const handleUpdate = async (update) => {
             // emitter.emit('text', message);
             if (message) {
                 try {
-                    await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
                         chat_id: message.chat.id,
                         text: "I got your message: " + message.text,
                     });            
