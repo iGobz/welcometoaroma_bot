@@ -33,6 +33,8 @@ const handleUpdate = async (update) => {
     if (update.message) {
 
         const { message } = update;
+
+        console.log('Message: ', message);
         
         if (message.text) {
             emitter.emit('text', message);
