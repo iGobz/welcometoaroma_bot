@@ -31,7 +31,7 @@ const sendMessage = (chat_id, text) => {
 
 
 
-const handleUpdate = (update) => {
+const handleUpdate = async (update) => {
 
 
     if (update.message) {
