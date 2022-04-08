@@ -8,6 +8,7 @@ const emitter = new EventEmitter();
 emitter.on('text', async (message) => {
 
     if (message.text == '/start') {
+        console.log('Handling received message: ', message);
         await sendMessage(message.chat.id, 'Привет! Я Арома Бот!');
     }
 });
@@ -34,8 +35,6 @@ const handleUpdate = async (update) => {
 
         const { message } = update;
 
-        console.log('Message: ', message);
-        
         if (message.text) {
             emitter.emit('text', message);
         }
