@@ -1,46 +1,54 @@
 // // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
-import fetch from 'node-fetch';
-
-const token = process.env.BOT_TOKEN
-
-const parse = async (message) => {
-    console.log(message)
-
-    try {
-        const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-            method: 'POST',
-            body: JSON.stringify({
-                chat_id: message.chat.id,
-                text: 'Hello' ,
-            })
-        });
-    } catch (error) {
-        throw Error(error);
-    }
-
-};
-
 
 
 exports.handler = async (event) => {
+    console.log("Received an update from Telegram!", JSON.parse(event.body));
+    return { statusCode: 200 };
+};
 
-    try {
-        const { message } = JSON.parse(event.body);
-        const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-            method: 'POST',
-            body: JSON.stringify({
-                chat_id: 218026127, //message.chat.id,
-                text: 'Hello' ,
-            })
-        });
-        // await parse(message);
-        // await sendMessage(message.chat.id, "I got your message!");
-        return { statusCode: 200 };    
-    } catch (error) {
-        console.log(error);
-        return { statusCode: 500, body: error.toString() }
-    }
-  };
+
+// import fetch from 'node-fetch';
+
+// const token = process.env.BOT_TOKEN
+
+// const parse = async (message) => {
+//     console.log(message)
+
+//     try {
+//         const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+//             method: 'POST',
+//             body: JSON.stringify({
+//                 chat_id: message.chat.id,
+//                 text: 'Hello' ,
+//             })
+//         });
+//     } catch (error) {
+//         throw Error(error);
+//     }
+
+// };
+
+
+
+// exports.handler = async (event) => {
+
+//     try {
+//         const { message } = JSON.parse(event.body);
+//         const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+//             method: 'POST',
+//             body: JSON.stringify({
+//                 chat_id: 218026127, //message.chat.id,
+//                 text: 'Hello' ,
+//             })
+//         });
+//         // await parse(message);
+//         // await sendMessage(message.chat.id, "I got your message!");
+//         return { statusCode: 200 };    
+//     } catch (error) {
+//         console.log(error);
+//         return { statusCode: 500, body: error.toString() }
+//     }
+//   };
 
 
 // import { Telegraf } from 'telegraf'
