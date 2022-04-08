@@ -1,10 +1,10 @@
 // // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
-const axios = require("axios").default;
+import axios from 'axios';
 const token = process.env.BOT_TOKEN
 
 
 
-exports.handler = async (event) => {
+export async function handler(event) {
     const { message } = JSON.parse(event.body);
     console.log("Received an update from Telegram!", event);
     if (message) {
@@ -14,7 +14,7 @@ exports.handler = async (event) => {
         });        
     }
     return { statusCode: 200 };
-};
+}
 
 
 // import fetch from 'node-fetch';
