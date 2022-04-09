@@ -8,6 +8,7 @@ const hashnode = require("../../hashnode");
 exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
   if (message) {
+      console.log(message)
     const { command, botName, extra } = messageParts(message.text);
 
     if (botName === "partiibot" || botName === null) {
