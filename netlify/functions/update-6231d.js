@@ -1,9 +1,13 @@
+const EventEmitter = require('events');
 const sendMessage = require("../../sendMessage");
 const messageParts = require("../../messageParts");
 const hashnode = require("../../hashnode");
 
+const emitter = new EventEmitter();
 
-// curl -F "url=https://welcometoaroma-bot-71a18f.netlify.app/.netlify/functions/update" https://api.telegram.org/bot5242713931:AAEHEFHsmGlaWLKkX1l_LRoNG7Kzm1dvWbM/setWebhook
+
+
+// curl -F "url=https://welcometoaroma-bot-71a18f.netlify.app/.netlify/functions/update-6231d" https://api.telegram.org/bot5242713931:AAEHEFHsmGlaWLKkX1l_LRoNG7Kzm1dvWbM/setWebhook
 
 exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
