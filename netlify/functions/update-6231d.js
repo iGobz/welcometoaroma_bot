@@ -10,9 +10,10 @@ const emitter = new EventEmitter();
 // curl -F "url=https://welcometoaroma-bot-71a18f.netlify.app/.netlify/functions/update-6231d" https://api.telegram.org/bot5242713931:AAEHEFHsmGlaWLKkX1l_LRoNG7Kzm1dvWbM/setWebhook
 
 exports.handler = async (event) => {
+    console.log(event);
   const { message } = JSON.parse(event.body);
   if (message) {
-      console.log(message)
+    //   console.log(message)
     const { command, botName, extra } = messageParts(message.text);
 
     if (botName === "partiibot" || botName === null) {
