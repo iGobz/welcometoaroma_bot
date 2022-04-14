@@ -6,6 +6,23 @@ const hashnode = require("../../hashnode");
 
 const emitter = new EventEmitter();
 
+const mainKeyboard = {
+    reply_markup: {
+        inline_keyboard: [[
+            {
+                text: 'Аптечка',
+                callback_data: 'first_aid'
+            }, {
+                text: 'Масла',
+                callback_data: 'essential_oils'
+            }, {
+                text: 'Другое',
+                callback_data: 'other'
+            }
+        ]]
+    }
+};
+
 let chatId;
 
 const updateHandler = (update) => {
@@ -44,23 +61,8 @@ emitter.on('command', async (command, ...args) => {
         }
     }
     if (command === '/keyboard') {
-        const keyboard = {
-            reply_markup: {
-                inline_keyboard: [[
-                    {
-                        text: 'Аптечка',
-                        callback_data: 'first_aid'
-                    }, {
-                        text: 'Масла',
-                        callback_data: 'essential_oils'
-                    }, {
-                        text: 'Другое',
-                        callback_data: 'other'
-                    }
-                ]]
-            }
-        };
-        await sendMessage(chatId, 'New keyboard', keyboard);
+ 
+        await sendMessage(chatId, 'New keyboard', mainKeyboard);
     }
 });
 
@@ -69,7 +71,7 @@ emitter.on('callback_query', async (query) => {
     console.log(query);
     const message_id = query.message.message_id;
 
-    await editMessageText(chatId, 'Вы выбрали: ' + query.data, { message_id })
+    await editMessageText(chatId, 'Вы выбрали: ' + query.data, { message_id, mainKeyboard })
 });
 
 
@@ -104,8 +106,8 @@ exports.handler = async (event) => {
           await sendMessage(message.chat.id, reply);
           break;
   
-        default:
-          await sendMessage(message.chat.id, "I don't understand that command.");
+        // default:
+        //   await sendMessage(message.chat.id, "I don't understand that command.");
       }
     }
   }
