@@ -71,7 +71,7 @@ emitter.on('callback_query', async (query) => {
     console.log(query);
     const message_id = query.message.message_id;
 
-    await editMessageText(chatId, 'Вы выбрали: ' + query.data, { message_id, keyboard })
+    await editMessageText(chatId, 'Вы выбрали: ' + query.data, { message_id: message_id, reply_markup: keyboard.reply_markup });
 });
 
 
