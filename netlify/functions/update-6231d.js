@@ -5,18 +5,48 @@ const hashnode = require("../../hashnode");
 
 const emitter = new EventEmitter();
 
+let chatId;
+
+const updateHandler = (update) => {
+
+    const { message } = update;
+
+    if (message) {
+
+        if (message.text) {
+
+            chatId = message.chat.id;
+            const words = message.text.split(/\s+/);
+
+            if (words[0].match(/^\./)) {
+                emitter.emit('command', words);
+            } else {
+                emitter.emit('text', words);
+            }
+        }
+    }
+};
+
+emitter.on('command', async (args) => {
+    if(command.toLowerCase() === '/start') {
+        await sendMessage(chatId, 'Привет! Я АромаБот!');
+    }
+});
+
 
 
 // curl -F "url=https://welcometoaroma-bot-71a18f.netlify.app/.netlify/functions/update-6231d" https://api.telegram.org/bot5242713931:AAEHEFHsmGlaWLKkX1l_LRoNG7Kzm1dvWbM/setWebhook
 
 exports.handler = async (event) => {
     console.log(event);
+
+    updateHandler(JSON.parse(event.body));
   const { message } = JSON.parse(event.body);
   if (message) {
     //   console.log(message)
     const { command, botName, extra } = messageParts(message.text);
 
-    if (botName === "partiibot" || botName === null) {
+    if (botName === "welcometoaroma_bot" || botName === null) {
       switch (command) {
         case "echo":
           await sendMessage(message.chat.id, extra || "ECHO!");
