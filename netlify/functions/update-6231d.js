@@ -19,15 +19,16 @@ const updateHandler = (update) => {
             const words = message.text.split(/\s+/);
 
             if (words[0].match(/^\./)) {
-                emitter.emit('command', words);
+                emitter.emit('command', ...words);
             } else {
-                emitter.emit('text', words);
+                emitter.emit('text', message.text);
             }
         }
     }
 };
 
-emitter.on('command', async (args) => {
+emitter.on('command', async (command, ...args) => {
+    console.log('Got command: ', command, 'args: ', args);
     if(command.toLowerCase() === '/start') {
         await sendMessage(chatId, 'Привет! Я АромаБот!');
     }
