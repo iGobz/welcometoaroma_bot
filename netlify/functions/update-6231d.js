@@ -18,7 +18,7 @@ const updateHandler = (update) => {
             chatId = message.chat.id;
             const words = message.text.split(/\s+/);
 
-            if (words[0].match(/^\./)) {
+            if (words[0].match(/^\//)) {
                 emitter.emit('command', ...words);
             } else {
                 emitter.emit('text', message.text);
