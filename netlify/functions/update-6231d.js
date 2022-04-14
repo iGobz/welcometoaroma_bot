@@ -46,7 +46,7 @@ emitter.on('command', async (command, ...args) => {
     if (command === '/keyboard') {
         const keyboard = {
             reply_markup: {
-                keyboard: [[
+                inline_keyboard: [[
                     {
                         text: 'Аптечка',
                         callback_data: 'first_aid'
