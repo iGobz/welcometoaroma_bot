@@ -29,8 +29,16 @@ const updateHandler = (update) => {
 
 emitter.on('command', async (command, ...args) => {
     console.log('Got command: ', command, 'args: ', args);
-    if(command.toLowerCase() === '/start') {
+    command = command.toLowerCase();
+    if (command === '/start') {
         await sendMessage(chatId, 'Привет! Я АромаБот!');
+    }
+    if (command === '/hello') {
+        if (args[0]) {
+            await sendMessage(chatId, 'Привет, ' + args[0]);
+        } else {
+            await sendMessage(chatId, 'Привет!');
+        }
     }
 });
 
