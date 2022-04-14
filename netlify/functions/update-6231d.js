@@ -6,7 +6,7 @@ const hashnode = require("../../hashnode");
 
 const emitter = new EventEmitter();
 
-const mainKeyboard = {
+const keyboard = {
     reply_markup: {
         inline_keyboard: [[
             {
@@ -62,7 +62,7 @@ emitter.on('command', async (command, ...args) => {
     }
     if (command === '/keyboard') {
  
-        await sendMessage(chatId, 'New keyboard', mainKeyboard);
+        await sendMessage(chatId, 'New keyboard', keyboard);
     }
 });
 
@@ -71,7 +71,7 @@ emitter.on('callback_query', async (query) => {
     console.log(query);
     const message_id = query.message.message_id;
 
-    await editMessageText(chatId, 'Вы выбрали: ' + query.data, { message_id, mainKeyboard })
+    await editMessageText(chatId, 'Вы выбрали: ' + query.data, { message_id, keyboard })
 });
 
 
