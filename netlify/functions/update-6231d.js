@@ -1,5 +1,6 @@
 const EventEmitter = require('events');
 const sendMessage = require("../../sendMessage");
+const editMessageText = require("../../editMessageText");
 const messageParts = require("../../messageParts");
 const hashnode = require("../../hashnode");
 
@@ -9,21 +10,23 @@ let chatId;
 
 const updateHandler = (update) => {
 
-    const { message } = update;
 
-    if (message) {
+    if (update.message) {
 
-        if (message.text) {
+        if (update.message.text) {
 
-            chatId = message.chat.id;
-            const words = message.text.split(/\s+/);
+            chatId = update.message.chat.id;
+            const words = update.message.text.split(/\s+/);
 
             if (words[0].match(/^\//)) {
                 emitter.emit('command', ...words);
             } else {
-                emitter.emit('text', message.text);
+                emitter.emit('text', update.message.text);
             }
         }
+    }
+    if(update.callback_query) {
+        emitter.emit('callback_query', update.callback_query);
     }
 };
 
@@ -43,15 +46,15 @@ emitter.on('command', async (command, ...args) => {
     if (command === '/keyboard') {
         const keyboard = {
             reply_markup: {
-                inline_keyboard: [[
+                keyboard: [[
                     {
-                        text: 'Development',
-                        callback_data: 'development'
+                        text: 'Аптечка',
+                        callback_data: 'first_aid'
                     }, {
-                        text: 'Lifestyle',
-                        callback_data: 'lifestyle'
+                        text: 'Масла',
+                        callback_data: 'essential_oils'
                     }, {
-                        text: 'Other',
+                        text: 'Другое',
                         callback_data: 'other'
                     }
                 ]]
@@ -59,6 +62,13 @@ emitter.on('command', async (command, ...args) => {
         };
         await sendMessage(chatId, 'New keyboard', keyboard);
     }
+});
+
+emitter.on('callback_query', async (query) => {
+
+    const message_id = query.message.message_id;
+
+    await editMessageText(chatId, { message_id, text: 'Вы выбрали: ' + query.message.data })
 });
 
 
