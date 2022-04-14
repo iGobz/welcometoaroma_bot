@@ -106,8 +106,8 @@ exports.handler = async (event) => {
           await sendMessage(message.chat.id, reply);
           break;
   
-        // default:
-        //   await sendMessage(message.chat.id, "I don't understand that command.");
+        default:
+          await sendMessage(message.chat.id, "I don't understand that command.");
       }
     }
   }
