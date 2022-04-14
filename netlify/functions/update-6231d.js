@@ -40,6 +40,25 @@ emitter.on('command', async (command, ...args) => {
             await sendMessage(chatId, 'Привет!');
         }
     }
+    if (command === '/keyboard') {
+        const keyboard = {
+            reply_markup: {
+                inline_keyboard: [[
+                    {
+                        text: 'Development',
+                        callback_data: 'development'
+                    }, {
+                        text: 'Lifestyle',
+                        callback_data: 'lifestyle'
+                    }, {
+                        text: 'Other',
+                        callback_data: 'other'
+                    }
+                ]]
+            }
+        };
+        await sendMessage(chatId, 'New keyboard', keyboard);
+    }
 });
 
 
