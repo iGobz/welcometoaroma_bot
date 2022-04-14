@@ -66,9 +66,10 @@ emitter.on('command', async (command, ...args) => {
 
 emitter.on('callback_query', async (query) => {
 
+    console.log(query);
     const message_id = query.message.message_id;
 
-    await editMessageText(chatId, { message_id, text: 'Вы выбрали: ' + query.message.data })
+    await editMessageText(chatId, 'Вы выбрали: ' + query.message.data, { message_id })
 });
 
 
